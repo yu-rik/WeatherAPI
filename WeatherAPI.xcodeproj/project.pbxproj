@@ -13,6 +13,8 @@
 		7A9D906324C9F42D003FDD1D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A9D906124C9F42D003FDD1D /* Main.storyboard */; };
 		7A9D906524C9F42F003FDD1D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A9D906424C9F42F003FDD1D /* Assets.xcassets */; };
 		7A9D906824C9F42F003FDD1D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A9D906624C9F42F003FDD1D /* LaunchScreen.storyboard */; };
+		7A9D907524C9FFC2003FDD1D /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A9D907424C9FFC2003FDD1D /* Default-568h@2x.png */; };
+		7A9D907724CA14EF003FDD1D /* ViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9D907624CA14EF003FDD1D /* ViewController+Alert.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		7A9D906424C9F42F003FDD1D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7A9D906724C9F42F003FDD1D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7A9D906924C9F42F003FDD1D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7A9D907424C9FFC2003FDD1D /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		7A9D907624CA14EF003FDD1D /* ViewController+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Alert.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +60,57 @@
 		7A9D905A24C9F42D003FDD1D /* WeatherAPI */ = {
 			isa = PBXGroup;
 			children = (
-				7A9D905B24C9F42D003FDD1D /* AppDelegate.swift */,
-				7A9D905D24C9F42D003FDD1D /* SceneDelegate.swift */,
-				7A9D905F24C9F42D003FDD1D /* ViewController.swift */,
-				7A9D906124C9F42D003FDD1D /* Main.storyboard */,
-				7A9D906424C9F42F003FDD1D /* Assets.xcassets */,
-				7A9D906624C9F42F003FDD1D /* LaunchScreen.storyboard */,
 				7A9D906924C9F42F003FDD1D /* Info.plist */,
+				7A9D907224C9FA09003FDD1D /* View Controllers */,
+				7A9D907124C9F9FF003FDD1D /* Models */,
+				7A9D907024C9F9F7003FDD1D /* Views */,
+				7A9D906F24C9F93F003FDD1D /* Extensions */,
+				7A9D907324C9FA1F003FDD1D /* Supporting files */,
 			);
 			path = WeatherAPI;
+			sourceTree = "<group>";
+		};
+		7A9D906F24C9F93F003FDD1D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				7A9D907624CA14EF003FDD1D /* ViewController+Alert.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		7A9D907024C9F9F7003FDD1D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7A9D906124C9F42D003FDD1D /* Main.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		7A9D907124C9F9FF003FDD1D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		7A9D907224C9FA09003FDD1D /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				7A9D905F24C9F42D003FDD1D /* ViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		7A9D907324C9FA1F003FDD1D /* Supporting files */ = {
+			isa = PBXGroup;
+			children = (
+				7A9D905B24C9F42D003FDD1D /* AppDelegate.swift */,
+				7A9D905D24C9F42D003FDD1D /* SceneDelegate.swift */,
+				7A9D906424C9F42F003FDD1D /* Assets.xcassets */,
+				7A9D906624C9F42F003FDD1D /* LaunchScreen.storyboard */,
+				7A9D907424C9FFC2003FDD1D /* Default-568h@2x.png */,
+			);
+			path = "Supporting files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -126,6 +172,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7A9D906824C9F42F003FDD1D /* LaunchScreen.storyboard in Resources */,
+				7A9D907524C9FFC2003FDD1D /* Default-568h@2x.png in Resources */,
 				7A9D906524C9F42F003FDD1D /* Assets.xcassets in Resources */,
 				7A9D906324C9F42D003FDD1D /* Main.storyboard in Resources */,
 			);
@@ -141,6 +188,7 @@
 				7A9D906024C9F42D003FDD1D /* ViewController.swift in Sources */,
 				7A9D905C24C9F42D003FDD1D /* AppDelegate.swift in Sources */,
 				7A9D905E24C9F42D003FDD1D /* SceneDelegate.swift in Sources */,
+				7A9D907724CA14EF003FDD1D /* ViewController+Alert.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
