@@ -23,7 +23,7 @@ struct NetworkWeatherManager {
                 
                // let dataString = String(data: data, encoding: .utf8)
                 //print(dataString!) //раcпечатает JSON данные
-                self.parseJSON(withData: data)
+               let currentWeather = self.parseJSON(withData: data)
             }
         }
         //чтоб произошел запрос - вызываем resume()
@@ -31,14 +31,20 @@ struct NetworkWeatherManager {
     }
      
     //метод который распарсит JSON-данные(расскладывает полученные данные по модели которую создали
-    func parseJSON(withData data: Data){
+    func parseJSON(withData data: Data) -> CurrentWeather?{
         let decoder = JSONDecoder()//создаем декодер
         do {
             let currentWeatherData = try decoder.decode(CurrentWeatherData.self, from: data)
-            print(currentWeatherData.main.temp)
+            
+            //создаем объект CurrentWeather
+            guard let currentWeather = CurrentWeather(currentWeatherData: currentWeatherData) else {return nil}
+            return currentWeather
+            
+            //  print(currentWeatherData.main.temp)
         } catch let error as NSError {
             print(error.localizedDescription)
         }
+        return nil
     }
     
 }
