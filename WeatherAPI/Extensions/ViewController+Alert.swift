@@ -9,7 +9,7 @@
 import UIKit
 
 extension ViewController {
-    func presentSearchAlertController(withTitle title: String?, message: String?, style: UIAlertController.Style){
+    func presentSearchAlertController(withTitle title: String?, message: String?, style: UIAlertController.Style, completionHandler: @escaping(String) -> Void){
         //создаем АлертКонтроллер и передаем значения из параметров метода
         let ac = UIAlertController(title: title, message: message, preferredStyle: style)
         //создаем текстовое поле в Алерт-Контроллере
@@ -22,7 +22,10 @@ extension ViewController {
             let textFD = ac.textFields?.first
             guard let cityName = textFD?.text else {return}
             if cityName != "" {
-                print("search info for the \(cityName)")
+               // print("search info for the \(cityName)")
+                //self.networkWeatherManager.fetchWeather(forCity: cityName)
+                let city = cityName.split(separator: " ").joined(separator: "%20")
+                completionHandler(city)
             }
         }
         

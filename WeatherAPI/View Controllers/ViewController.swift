@@ -19,14 +19,18 @@ class ViewController: UIViewController {
     
     @IBAction func searchPressed(_ sender: UIButton) {
        
-        presentSearchAlertController(withTitle: "Enter city name", message: nil, style: .alert)
+       // presentSearchAlertController(withTitle: "Enter city name", message: nil, style: .alert)
+        presentSearchAlertController(withTitle: "Enter city Name", message: nil, style: .alert) { (city) in
+            self.networkWeatherManager.fetchWeather(forCity: city)
+        }
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
        
-        networkWeatherManager.fetchWeather(forCity: "Kyiv")
+       
+       // networkWeatherManager.fetchWeather(forCity: "Kyiv")
     }
 
 
