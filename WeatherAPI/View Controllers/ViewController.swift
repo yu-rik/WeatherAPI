@@ -21,7 +21,11 @@ class ViewController: UIViewController {
        
        // presentSearchAlertController(withTitle: "Enter city name", message: nil, style: .alert)
         presentSearchAlertController(withTitle: "Enter city Name", message: nil, style: .alert) { (city) in
-            self.networkWeatherManager.fetchWeather(forCity: city)
+            self.networkWeatherManager.fetchWeather(forCity: city) {
+                currentWeather in
+                print(currentWeather.cityName)
+            }
+            
         }
     }
     

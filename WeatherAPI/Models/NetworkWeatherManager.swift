@@ -7,8 +7,9 @@
 //
 
 import Foundation
-struct NetworkWeatherManager {
-    func fetchWeather(forCity city: String) {
+struct NetworkWeatherManager{
+    //передача данных через closure который вписан в качестве completionHandler в метод
+    func fetchWeather(forCity city: String, completionHandler: @escaping (CurrentWeather) -> Void) {
         //метод для получения JSON данных
         let urlString = "https://api.openweathermap.org/data/2.5/weather?q=\(city)&apikey=\(apiKey)"
         //создаем URL-строку
@@ -23,7 +24,9 @@ struct NetworkWeatherManager {
                 
                // let dataString = String(data: data, encoding: .utf8)
                 //print(dataString!) //раcпечатает JSON данные
-               let currentWeather = self.parseJSON(withData: data)
+                if let currentWeather = self.parseJSON(withData: data){
+                    completionHandler(currentWeather)
+                }
             }
         }
         //чтоб произошел запрос - вызываем resume()
