@@ -30,10 +30,14 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        networkWeatherManager.onCompletion = {
-            currentWeather in
-            print(currentWeather.cityName)
-        }
+       
+        //чтоб viewController был связан с networkWeatherManager мы должны объявить viewController как делегат от networkWeatherManager
+       networkWeatherManager.delegate = self
+        
+     //   networkWeatherManager.onCompletion = {
+        //    currentWeather in
+        //    print(currentWeather.cityName)
+      //  }
        
        
        // networkWeatherManager.fetchWeather(forCity: "Kyiv")
@@ -41,4 +45,12 @@ class ViewController: UIViewController {
 
 
 }
-
+//чтоб viewController был делегатом NetworkWeatherManagerDelegate подписываем его под этот протокол
+extension ViewController: NetworkWeatherManagerDelegate{
+    func updateInterface(_: NetworkWeatherManager, with currentWeather: CurrentWeather) {
+        //обновление интерфейса
+        print(currentWeather.cityName)
+    }
+    
+    
+}
