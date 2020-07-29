@@ -8,8 +8,12 @@
 
 import Foundation
 struct NetworkWeatherManager{
-    //передача данных через closure который вписан в качестве completionHandler в метод
-    func fetchWeather(forCity city: String, completionHandler: @escaping (CurrentWeather) -> Void) {
+    //Способ №2 передача данных через closure созданный как свойство
+    
+    //создаем closure onCopletion(дополнительный CompletionHandler,который дает возможность подписаться под изменения currentWeather
+    var onCompletion:((CurrentWeather) -> Void)?
+    
+    func fetchWeather(forCity city: String) {
         //метод для получения JSON данных
         let urlString = "https://api.openweathermap.org/data/2.5/weather?q=\(city)&apikey=\(apiKey)"
         //создаем URL-строку
@@ -22,11 +26,16 @@ struct NetworkWeatherManager{
         let task = session.dataTask(with: url) { data, response, error in
             if let data = data{
                 
-               // let dataString = String(data: data, encoding: .utf8)
+                // let dataString = String(data: data, encoding: .utf8)
                 //print(dataString!) //раcпечатает JSON данные
                 if let currentWeather = self.parseJSON(withData: data){
-                    completionHandler(currentWeather)
+                   
+                    //передаем currentWeather через onCompletion
+                    self.onCompletion?(currentWeather)
                 }
+                
+                
+                
             }
         }
         //чтоб произошел запрос - вызываем resume()

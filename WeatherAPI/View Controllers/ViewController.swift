@@ -15,16 +15,14 @@ class ViewController: UIViewController {
     @IBOutlet weak var feelsLikeLabel: UILabel!
     @IBOutlet weak var cityLabel: UILabel!
     
-    let networkWeatherManager = NetworkWeatherManager()
+    var networkWeatherManager = NetworkWeatherManager()
     
     @IBAction func searchPressed(_ sender: UIButton) {
        
        // presentSearchAlertController(withTitle: "Enter city name", message: nil, style: .alert)
         presentSearchAlertController(withTitle: "Enter city Name", message: nil, style: .alert) { (city) in
-            self.networkWeatherManager.fetchWeather(forCity: city) {
-                currentWeather in
-                print(currentWeather.cityName)
-            }
+            self.networkWeatherManager.fetchWeather(forCity: city)
+            
             
         }
     }
@@ -32,6 +30,10 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        networkWeatherManager.onCompletion = {
+            currentWeather in
+            print(currentWeather.cityName)
+        }
        
        
        // networkWeatherManager.fetchWeather(forCity: "Kyiv")
