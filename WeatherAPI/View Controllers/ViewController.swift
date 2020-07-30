@@ -16,41 +16,39 @@ class ViewController: UIViewController {
     @IBOutlet weak var cityLabel: UILabel!
     
     var networkWeatherManager = NetworkWeatherManager()
+   
     
     @IBAction func searchPressed(_ sender: UIButton) {
        
-       // presentSearchAlertController(withTitle: "Enter city name", message: nil, style: .alert)
-        presentSearchAlertController(withTitle: "Enter city Name", message: nil, style: .alert) { (city) in
+       
+        presentSearchAlertController(withTitle: "Enter city Name", message: nil, style: .alert) { [unowned self](city) in
             self.networkWeatherManager.fetchWeather(forCity: city)
-            
-            
         }
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
-        //чтоб viewController был связан с networkWeatherManager мы должны объявить viewController как делегат от networkWeatherManager
-       networkWeatherManager.delegate = self
+
         
-     //   networkWeatherManager.onCompletion = {
-        //    currentWeather in
-        //    print(currentWeather.cityName)
-      //  }
+        networkWeatherManager.onCompletion = { [weak self] currentWeather in
+            guard  let self = self else {return}
+            self.updateInterfaceWith(weather: currentWeather)
+            
+        }
        
-       
-       // networkWeatherManager.fetchWeather(forCity: "Kyiv")
+      networkWeatherManager.fetchWeather(forCity: "Kyiv")
+    }
+//метод обновления интерфейса по конкретной погоде
+    func updateInterfaceWith(weather: CurrentWeather){
+        DispatchQueue.main.async {
+            
+            self.temperatureLabel.text = weather.temperatureString
+            self.feelsLikeLabel.text = weather.feelsLikeString
+            self.cityLabel.text = weather.cityName
+            self.weatherImage.image = UIImage(systemName: weather.systemWeatherIcon)
+        }
     }
 
+}
 
-}
-//чтоб viewController был делегатом NetworkWeatherManagerDelegate подписываем его под этот протокол
-extension ViewController: NetworkWeatherManagerDelegate{
-    func updateInterface(_: NetworkWeatherManager, with currentWeather: CurrentWeather) {
-        //обновление интерфейса
-        print(currentWeather.cityName)
-    }
-    
-    
-}

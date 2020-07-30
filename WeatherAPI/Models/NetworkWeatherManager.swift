@@ -7,22 +7,17 @@
 //
 
 import Foundation
-//через делегирование
-protocol NetworkWeatherManagerDelegate {
-    func updateInterface(_: NetworkWeatherManager, with currentWeather: CurrentWeather)
-}
 
-struct NetworkWeatherManager{
-    //Способ №2 передача данных через closure созданный как свойство
+
+class NetworkWeatherManager{
+    //передача данных через closure созданный как свойство
     
     //создаем closure onCopletion(дополнительный CompletionHandler,который дает возможность подписаться под изменения currentWeather
-   // var onCompletion:((CurrentWeather) -> Void)?
-    
-    var delegate: NetworkWeatherManagerDelegate? //свойство delegate
-    
+   var onCompletion:((CurrentWeather) -> Void)?
+     
     func fetchWeather(forCity city: String) {
         //метод для получения JSON данных
-        let urlString = "https://api.openweathermap.org/data/2.5/weather?q=\(city)&apikey=\(apiKey)"
+        let urlString = "https://api.openweathermap.org/data/2.5/weather?q=\(city)&apikey=\(apiKey)&units=metric"
         //создаем URL-строку
         guard let url = URL(string: urlString)else {return}
         
@@ -38,9 +33,7 @@ struct NetworkWeatherManager{
                 if let currentWeather = self.parseJSON(withData: data){
                    
                     //передаем currentWeather через onCompletion
-                    //self.onCompletion?(currentWeather)
-                    
-                    self.delegate?.updateInterface(self, with: currentWeather) //закидываем в делегат currentWeather
+                    self.onCompletion?(currentWeather)
                 }
                 
                 

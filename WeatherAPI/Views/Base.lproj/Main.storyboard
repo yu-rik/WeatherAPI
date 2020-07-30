@@ -36,14 +36,6 @@
                                     <action selector="searchPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="pCY-gY-iu6"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cloud.rain.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Bta-ai-ezo">
-                                <rect key="frame" x="127" y="74.666666666666671" width="160" height="159.66666666666669"/>
-                                <color key="tintColor" name="infoColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="160" id="1n1-Yk-za8"/>
-                                    <constraint firstAttribute="height" constant="158.5" id="PGm-zi-kpm"/>
-                                </constraints>
-                            </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="KSE-Rd-Qzn">
                                 <rect key="frame" x="162" y="239.99999999999997" width="90" height="42.666666666666657"/>
                                 <subviews>
@@ -78,6 +70,14 @@
                                     </label>
                                 </subviews>
                             </stackView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nosign" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Bta-ai-ezo">
+                                <rect key="frame" x="127" y="75" width="160" height="157.33333333333331"/>
+                                <color key="tintColor" name="infoColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="160" id="1n1-Yk-za8"/>
+                                    <constraint firstAttribute="height" constant="158.5" id="PGm-zi-kpm"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -113,8 +113,8 @@
     </scenes>
     <resources>
         <image name="Afternoon-1" width="375" height="667"/>
-        <image name="cloud.rain.fill" catalog="system" width="64" height="62"/>
         <image name="magnifyingglass" catalog="system" width="64" height="56"/>
+        <image name="nosign" catalog="system" width="64" height="60"/>
         <namedColor name="infoColor">
             <color red="0.13699999451637268" green="0.14000000059604645" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
