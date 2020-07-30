@@ -6,7 +6,8 @@
 //  Copyright © 2020 yurik. All rights reserved.
 //
 
-import Foundation
+import UIKit
+import CoreLocation
 
 
 class NetworkWeatherManager{
@@ -15,9 +16,25 @@ class NetworkWeatherManager{
     //создаем closure onCopletion(дополнительный CompletionHandler,который дает возможность подписаться под изменения currentWeather
    var onCompletion:((CurrentWeather) -> Void)?
      
+    // метод получения погоды по названию города
     func fetchWeather(forCity city: String) {
         //метод для получения JSON данных
         let urlString = "https://api.openweathermap.org/data/2.5/weather?q=\(city)&apikey=\(apiKey)&units=metric"
+        performRequest(withURLString: urlString)
+        
+    }
+     
+    // метод получения погоды по координатам
+    func fetchWeather(latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
+        //метод для получения JSON данных
+        let urlString = "https://api.openweathermap.org/data/2.5/weather?lat={\(latitude)}&lon={\(longitude)}&apikey=\(apiKey)&units=metric"
+        
+       performRequest(withURLString: urlString)
+  
+    
+    }
+    
+    func performRequest(withURLString urlString: String){
         //создаем URL-строку
         guard let url = URL(string: urlString)else {return}
         
@@ -35,15 +52,14 @@ class NetworkWeatherManager{
                     //передаем currentWeather через onCompletion
                     self.onCompletion?(currentWeather)
                 }
-                
-                
-                
             }
         }
         //чтоб произошел запрос - вызываем resume()
         task.resume()
     }
-     
+    
+    
+    
     //метод который распарсит JSON-данные(расскладывает полученные данные по модели которую создали
     func parseJSON(withData data: Data) -> CurrentWeather?{
         let decoder = JSONDecoder()//создаем декодер

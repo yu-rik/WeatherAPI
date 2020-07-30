@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class ViewController: UIViewController {
 
@@ -17,6 +18,19 @@ class ViewController: UIViewController {
     
     var networkWeatherManager = NetworkWeatherManager()
    
+    //создаем ленивую переменную определения местоположения
+    lazy var locationManager: CLLocationManager = {
+       // создание экземпляра класса CLLocationManager
+        let lm = CLLocationManager()
+        //объявляем ViewController делегатом lm (CLLocationManager)
+        lm.delegate = self
+        
+        //определение точности положения
+        lm.desiredAccuracy = kCLLocationAccuracyKilometer
+        //запрос пользователя к доступу его геопозиции
+        lm.requestWhenInUseAuthorization()
+        return lm
+    }()
     
     @IBAction func searchPressed(_ sender: UIButton) {
        
@@ -37,7 +51,11 @@ class ViewController: UIViewController {
             
         }
        
-      networkWeatherManager.fetchWeather(forCity: "Kyiv")
+      //networkWeatherManager.fetchWeather(forCity: "Kyiv")
+      //общие настройки геопозиции
+        if CLLocationManager.locationServicesEnabled(){
+            locationManager.requestLocation()
+        }
     }
 //метод обновления интерфейса по конкретной погоде
     func updateInterfaceWith(weather: CurrentWeather){
@@ -52,3 +70,15 @@ class ViewController: UIViewController {
 
 }
 
+//подписываем ViewController под протокол CLLocationManagerDelegate
+extension ViewController: CLLocationManagerDelegate{
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let location = locations.last else {return}
+        let latitude = location.coordinate.latitude
+        let longitude = location.coordinate.longitude
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error.localizedDescription)
+    }
+}
